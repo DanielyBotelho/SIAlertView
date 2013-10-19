@@ -1012,9 +1012,11 @@ static SIAlertView *__si_alert_current_view;
 	button.tag = index;
 	button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     button.titleLabel.font = self.buttonFont;
+    button.tintColor = [UIColor whiteColor];
     button.layer.borderColor = item.borderColor.CGColor;
     button.layer.borderWidth = item.borderWidth;
     button.backgroundColor = item.color;
+    
 	[button setTitle:item.title forState:UIControlStateNormal];
 	UIImage *normalImage = nil;
 	UIImage *highlightedImage = nil;
@@ -1039,14 +1041,17 @@ static SIAlertView *__si_alert_current_view;
             [button setTitleColor:[self.buttonColor colorWithAlphaComponent:0.8] forState:UIControlStateHighlighted];
 			break;
 	}
-	CGFloat hInset = floorf(normalImage.size.width / 2);
-	CGFloat vInset = floorf(normalImage.size.height / 2);
-	UIEdgeInsets insets = UIEdgeInsetsMake(vInset, hInset, vInset, hInset);
-	normalImage = [normalImage resizableImageWithCapInsets:insets];
-	highlightedImage = [highlightedImage resizableImageWithCapInsets:insets];
-	[button setBackgroundImage:normalImage forState:UIControlStateNormal];
-	[button setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
-	[button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    if (item.color == nil) {
+        CGFloat hInset = floorf(normalImage.size.width / 2);
+        CGFloat vInset = floorf(normalImage.size.height / 2);
+        UIEdgeInsets insets = UIEdgeInsetsMake(vInset, hInset, vInset, hInset);
+        normalImage = [normalImage resizableImageWithCapInsets:insets];
+        highlightedImage = [highlightedImage resizableImageWithCapInsets:insets];
+        [button setBackgroundImage:normalImage forState:UIControlStateNormal];
+        [button setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
+    }
+    
+    [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     return button;
 }
