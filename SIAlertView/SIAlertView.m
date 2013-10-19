@@ -186,6 +186,8 @@ static SIAlertView *__si_alert_current_view;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) SIAlertViewButtonType type;
 @property (nonatomic, copy) SIAlertViewHandler action;
+@property (nonatomic, copy) UIColor *color;
+@property (nonatomic, copy) UIColor *borderColor;
 
 @end
 
@@ -400,6 +402,17 @@ static SIAlertView *__si_alert_current_view;
 {
     SIAlertItem *item = [[SIAlertItem alloc] init];
 	item.title = title;
+	item.type = type;
+	item.action = handler;
+	[self.items addObject:item];
+}
+
+- (void)addButtonWithColorAndBorder:(NSString *)title type:(SIAlertViewButtonType)type color:(UIColor *)color border:(UIColor *)borderColor handler:(SIAlertViewHandler)handler
+{
+    SIAlertItem *item = [[SIAlertItem alloc] init];
+	item.title = title;
+    item.color = color;
+    item.borderColor = borderColor;
 	item.type = type;
 	item.action = handler;
 	[self.items addObject:item];
@@ -975,6 +988,8 @@ static SIAlertView *__si_alert_current_view;
 	button.tag = index;
 	button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     button.titleLabel.font = self.buttonFont;
+    button.layer.borderColor = item.borderColor.CGColor;
+    button.backgroundColor = item.color;
 	[button setTitle:item.title forState:UIControlStateNormal];
 	UIImage *normalImage = nil;
 	UIImage *highlightedImage = nil;

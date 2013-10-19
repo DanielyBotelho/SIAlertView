@@ -74,6 +74,7 @@ typedef void(^SIAlertViewHandler)(SIAlertView *alertView);
 
 - (id)initWithTitle:(NSString *)title andMessage:(NSString *)message;
 - (void)addButtonWithTitle:(NSString *)title type:(SIAlertViewButtonType)type handler:(SIAlertViewHandler)handler;
+- (void)addButtonWithColorAndBorder:(NSString *)title type:(SIAlertViewButtonType)type color:(UIColor *)color border:(UIColor *)borderColor handler:(SIAlertViewHandler)handler;
 
 - (void)show;
 - (void)dismissAnimated:(BOOL)animated;
