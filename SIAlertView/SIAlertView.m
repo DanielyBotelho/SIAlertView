@@ -188,7 +188,7 @@ static SIAlertView *__si_alert_current_view;
 @property (nonatomic, copy) SIAlertViewHandler action;
 @property (nonatomic, copy) UIColor *color;
 @property (nonatomic, copy) UIColor *borderColor;
-@property (nonatomic, copy) float borderWidth;
+@property float borderWidth;
 
 @end
 
@@ -308,10 +308,10 @@ static SIAlertView *__si_alert_current_view;
 
 - (id)init
 {
-	return [self initWithTitle:nil andMessage:nil];
+	return [self initWithTitle:nil message:nil];
 }
 
-- (id)initWithTitle:(NSString *)title andMessage:(NSString *)message
+- (id)initWithTitle:(NSString *)title message:(NSString *)message
 {
 	self = [super init];
 	if (self) {
@@ -408,17 +408,28 @@ static SIAlertView *__si_alert_current_view;
 	[self.items addObject:item];
 }
 
-- (void)addButtonWithBorder:(NSString *)title type:(SIAlertViewButtonType)type color:(UIColor *)color border:(UIColor *)borderColor borderWitdh:(float)borderWidth handler:(SIAlertViewHandler)handler
+- (void)addButtonWithBorder:(NSString *)title color:(UIColor *)color border:(UIColor *)borderColor borderWitdh:(float)borderWidth handler:(SIAlertViewHandler)handler
 {
     SIAlertItem *item = [[SIAlertItem alloc] init];
 	item.title = title;
     item.color = color;
     item.borderColor = borderColor;
-	item.type = type;
     item.borderWidth = borderWidth;
 	item.action = handler;
 	[self.items addObject:item];
 }
+
+- (void)addAlertButtonWithTitle:(NSString *)title
+                          color:(UIColor *)color
+                        handler:(SIAlertViewHandler)handler
+{
+        SIAlertItem *item = [[SIAlertItem alloc] init];
+        item.title = title;
+        item.color = color;
+        item.action = handler;
+        [self.items addObject:item];
+}
+
 
 - (void)show
 {

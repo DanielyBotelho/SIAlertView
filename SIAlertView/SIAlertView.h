@@ -72,9 +72,12 @@ typedef void(^SIAlertViewHandler)(SIAlertView *alertView);
 - (void)setCancelButtonImage:(UIImage *)cancelButtonImage forState:(UIControlState)state NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
 - (void)setDestructiveButtonImage:(UIImage *)destructiveButtonImage forState:(UIControlState)state NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
 
-- (id)initWithTitle:(NSString *)title andMessage:(NSString *)message;
+- (id)initWithTitle:(NSString *)title message:(NSString *)message;
 - (void)addButtonWithTitle:(NSString *)title type:(SIAlertViewButtonType)type handler:(SIAlertViewHandler)handler;
-- (void)addButtonWithBorder:(NSString *)title type:(SIAlertViewButtonType)type color:(UIColor *)color border:(UIColor *)borderColor borderWitdh:(float)borderWidth handler:(SIAlertViewHandler)handler;
+- (void)addButtonWithBorder:(NSString *)title color:(UIColor *)color border:(UIColor *)borderColor borderWitdh:(float)borderWidth handler:(SIAlertViewHandler)handler;
+- (void)addAlertButtonWithTitle:(NSString *)title
+                          color:(UIColor *)color
+                        handler:(SIAlertViewHandler)handler;
 
 - (void)show;
 - (void)dismissAnimated:(BOOL)animated;
